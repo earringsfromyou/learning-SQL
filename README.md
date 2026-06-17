@@ -186,6 +186,13 @@ GROUP BY
 ORDER BY
 	SUM(salary) DESC
 LIMIT 1;
-hi
+
+SELECT dept,count(dept)
+FROM 
+	Employees
+GROUP BY dept
+HAVING count(dept)>2
+;
+
 
 
