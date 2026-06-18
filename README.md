@@ -194,5 +194,62 @@ GROUP BY dept
 HAVING count(dept)>2
 ;
 
+SET SQL_SAFE_UPDATES=0;
+
+UPDATE Employees
+SET salary=55000
+WHERE emp_name ="Ram";
+
+UPDATE Employees
+SET dept = 'Finance'
+WHERE emp_name='sita';
+
+UPDATE Employees
+SET salary=48000
+WHERE emp_id=4;
+
+UPDATE Employees
+SET emp_name='Ritu'
+WHERE emp_name='Rita';
+
+UPDATE Employees
+SET salary=salary+5000
+WHERE dept = 'IT';
+
+UPDATE Employees
+SET salary =salary+(0.1*salary)
+WHERE dept ='HR';
+
+UPDATE Employees
+SET dept='Accounts'
+WHERE dept='Finance';
+
+UPDATE Employees
+SET salary=salary+3000
+WHERE salary<50000;
+
+UPDATE Employees
+SET salary=salary+(0.05*salary);
+
+UPDATE Employees
+SET dept='Senior IT'
+WHERE salary>60000;
+
+UPDATE Employees
+SET salary=50000
+WHERE salary<(
+	SELECT ag FROM(
+    SELECT AVG(salarY) AS ag
+    FROM EMPLOYEES)AS TEMP
+);
+
+UPDATE Employees
+SET emp_name='Top Performer'
+WHERE salary=(
+	SELECT mx FROM(SELECT MAX(salary)AS mx
+    FROM Employees )AS temp
+);
+SELECT *
+FROM Employees;
 
 
