@@ -252,4 +252,48 @@ WHERE salary=(
 SELECT *
 FROM Employees;
 
+-- PRACTICING DELETE COMMAND;
+
+CREATE TABLE Books (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    author VARCHAR(50),
+    genre VARCHAR(30),
+    price DECIMAL(8,2)
+);
+
+INSERT INTO Books(book_id,title,author,genre,price) VALUES
+(1, 'The Alchemist', 'Paulo Coelho', 'Fiction', 15.99),
+(2, 'Clean Code', 'Robert Martin', 'Programming', 45.00),
+(3, 'Atomic Habits', 'James Clear', 'Self Help', 20.50),
+(4, 'The Pragmatic Programmer', 'Andrew Hunt', 'Programming', 50.00),
+(5, 'Rich Dad Poor Dad', 'Robert Kiyosaki', 'Finance', 18.75),
+(6, 'Think and Grow Rich', 'Napoleon Hill', 'Finance', 12.50),
+(7, 'Deep Work', 'Cal Newport', 'Productivity', 22.00),
+(8, 'Python Crash Course', 'Eric Matthes', 'Programming', 35.00);
+
+SELECT *
+FROM Books;
+
+DELETE FROM Books
+WHERE book_id = 5;
+
+DELETE FROM Books
+WHERE title='Deep Work';
+
+DELETE FROM Books 
+WHERE genre='Finance';
+
+DELETE FROM Books
+WHERE price <20;
+
+DELETE FROM Books
+WHERE author ='Paulo Coelho';
+
+DELETE FROM Books
+WHERE genre='Programming';
+
+DELETE FROM Books
+WHERE title LIKE 'THE%';
+
 
