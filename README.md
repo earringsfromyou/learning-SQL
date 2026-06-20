@@ -296,4 +296,64 @@ WHERE genre='Programming';
 DELETE FROM Books
 WHERE title LIKE 'THE%';
 
+DELETE FROM Books
+WHERE book_id BETWEEN 2 and 5;
+
+DELETE FROM Books
+WHERE price=(
+SELECT max_price FROM (SELECT MAX(PRICE) AS max_price FROM Books)AS temp
+);
+
+DELETE FROM Books
+WHERE price = (SELECT min_price 
+	FROM (SELECT  MIN(price) AS min_price FROM Books)AS temp
+);
+
+DELETE FROM Books
+WHERE genre != 'Programming';
+
+DELETE FROM Books
+WHERE price>(
+	SELECT avg_price FROM(SELECT AVG(price) AS avg_price FROM Books) AS temp
+);
+
+DELETE FROM Books
+WHERE author LIKE '%Hill' OR author LIKE '%Clear';
+
+DELETE FROM Books
+WHERE price = (SELECT MAX(price) FROM Books);
+
+DELETE FROM Books
+WHERE price = (SELECT MIN(price)FROM Books);
+
+DELETE FROM Books
+WHERE genre =(
+SELECT genre_name  
+FROM (SELECT genre AS genre_name
+	FROM Books
+	GROUP BY genre
+	ORDER BY count(*) DESC
+	LIMIT 1)AS temp
+);
+
+DELETE FROM Books
+WHERE price NOT IN (
+SELECT price 
+FROM (
+	SELECT price 
+    FROM Books
+    ORDER BY price DESC
+    LIMIT 2
+)AS temp
+);
+
+DELETE FROM Books 
+WHERE price NOT IN (
+SELECT min_price
+FROM(
+	SELECT price AS min_price 
+    FROM Books
+    ORDER BY price ASC 
+    LIMIT 3)AS temp
+);
 
