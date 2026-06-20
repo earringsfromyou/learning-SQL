@@ -356,4 +356,3 @@ FROM(
     ORDER BY price ASC 
     LIMIT 3)AS temp
 );
-
