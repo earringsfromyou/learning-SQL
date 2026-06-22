@@ -356,3 +356,56 @@ FROM(
     ORDER BY price ASC 
     LIMIT 3)AS temp
 );
+-- practing foreign key and alter query
+
+CREATE TABLE Departments(
+dept_id INT PRIMARY KEY,
+dept_name VARCHAR(50)
+);
+
+CREATE TABLE Employees(
+emp_id INT PRIMARY KEY,
+emp_name VARCHAR(50),
+dept_id INT,
+FOREIGN KEY (dept_id) references Departments(dept_id)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+
+INSERT INTO Departments(dept_id, dept_name) VALUES
+(1,'HR'),
+(2,'IT'),
+(3,'Sales');
+
+INSERT INTO Employees(emp_id,emp_name,dept_id) VALUES
+(101,'RAM',1),
+(102,'Sita',2),
+(103,'Hari',3);
+
+INSERT INTO Employees VALUES (104, 'Gita', 5);
+-- will throw an error beacause there is no value '5' from where it is getting refrence from
+
+CREATE TABLE  Customers(
+customer_id INT PRIMARY KEY,
+customer_name VARCHAR(50)
+);
+
+CREATE TABLE Orders(
+order_id  INT PRIMARY KEY,
+product_name VARCHAR(50),
+customer_id INT,
+FOREIGN KEY (customer_id) references Customers(customer_id)
+ON DELETE CASCADE
+);
+
+INSERT INTO Customers(customer_id,customer_name) VALUES
+(1,'A'),
+(2,'B');
+
+INSERT INTO Orders(order_id,product_name,customer_id) VALUES
+(11,'Laptop',1),
+(12,'Mouse',1),
+(13,'Keyboard',2);
+
+DELETE FROM Customers
+WHERE customer_id = 1;
