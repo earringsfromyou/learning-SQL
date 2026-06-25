@@ -409,3 +409,33 @@ INSERT INTO Orders(order_id,product_name,customer_id) VALUES
 
 DELETE FROM Customers
 WHERE customer_id = 1;
+
+-- ALTER PRACTICE
+
+CREATE TABLE kitab(
+    book_id INT PRIMARY KEY,
+    title VARCHAR(50),
+    price DECIMAL(8,2)
+);
+
+ALTER TABLE kitab
+ADD COLUMN author VARCHAR(50);
+
+ALTER TABLE kitab
+ADD COLUMN publication_year INT;
+
+ALTER TABLE kitab
+MODIFY COLUMN title VARCHAR(100);
+
+ALTER TABLE kitab
+CHANGE COLUMN price book_price DECIMAL(8,2);
+
+ALTER TABLE kitab
+DROP COLUMN publication_year;
+
+ALTER TABLE kitab
+RENAME TO LibraryKitab;
+
+-- TRUCATE COMMAND
+
+TRUNCATE TABLE kitab; -- "will delete all the data inside table without needing to drop the table"
