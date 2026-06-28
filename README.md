@@ -439,3 +439,68 @@ RENAME TO LibraryKitab;
 -- TRUCATE COMMAND
 
 TRUNCATE TABLE kitab; -- "will delete all the data inside table without needing to drop the table"
+
+-- JOINS IN SQL
+
+CREATE DATABASE FOOD;
+
+USE FOOD;
+
+CREATE TABLE Customers(
+customer_id INT PRIMARY KEY,
+customer_name VARCHAR(50),
+city VARCHAR(50)
+);
+
+CREATE TABLE Restaurants(
+restaurant_id INT PRIMARY KEY,
+resturant_name VARCHAR(50),
+cuisine VARCHAR(50)
+);
+
+CREATE TABLE Orders(
+order_id INT PRIMARY KEY,
+customer_id INT,
+restaurant_id INT,
+amount DECIMAL(8,2),
+FOREIGN KEY(restaurant_id) references Restaurants(restaurant_id),
+FOREIGN KEY(customer_id) references Customers(customer_id)
+);
+
+INSERT INTO Customers(customer_id,customer_name,city) VALUES
+(1,'Aadarsha','Pokhara'),
+(2,'Riya','Kathmandu'),
+(3,'Suman','Butwal'),
+(4,'Nabin','Dharan'),
+(5,'Anisha','Pokhara');
+
+INSERT INTO Restaurants VALUES
+(101, 'Burger Hub', 'Fast Food'),
+(102, 'Everest Mo:Mo', 'Nepali'),
+(103, 'Pizza Planet', 'Italian'),
+(104, 'Sushi House', 'Japanese');
+
+INSERT INTO Orders VALUES
+(1001, 1, 101, 650.00),
+(1002, 2, 102, 480.00),
+(1003, 1, 103, 950.00),
+(1004, 5, 101, 720.00),
+(1005, 3, NULL, 300.00),
+(1006, NULL, 104, 800.00);
+
+SELECT order_id,customer_name,resturant_name,amount
+FROM Orders
+JOIN Customers
+ON Orders.customer_id=Customers.customer_id
+JOIN Restaurants
+ON Orders.restaurant_id=Restaurants.restaurant_id;
+
+SELECT c.customer_name,o.order_id
+FROM Customers c
+JOIN Orders o
+ON c.customer_id = o.customer_id;
+
+SELECT r.resturant_name,o.order_id
+FROM Restaurants r
+LEFT JOIN Orders o
+ON r.restaurant_id = o.restaurant_id;
